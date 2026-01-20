@@ -9,7 +9,7 @@ import winsound # Para emitir som alerta
 # CONFIGURAÇÕES -- (PRESERVADAS)
 # ==============================================================================
 TELEGRAM_BOT_TOKEN = "SEU_TOKEN_AQUI"
-TELEGRAM_CHAT_ID = "SEU_CHAT_ID_AQUI"
+TELEGRAM_CHAT_ID = "TELEGRAM_CHAT_ID"
 
 # Intervalo entre verificações completas (em segundos)
 INTERVALO_VERIFICACAO = 5  # 10 segundos (Modo Turbo)
@@ -18,7 +18,7 @@ INTERVALO_VERIFICACAO = 5  # 10 segundos (Modo Turbo)
 DELAY_ENTRE_REQUISICOES = 0.3
 
 # Dias para verificar à frente (Ex: verificar os próximos 30 dias)
-DIAS_PARA_VERIFICAR = 12
+DIAS_PARA_VERIFICAR = 30
 
 # Ative para ver TODAS as respostas no terminal (True/False)
 DEBUG_MODE = True
@@ -54,63 +54,60 @@ def verificar_vagas(session):
 
     logging.info(f"🔄 Iniciando ciclo de verificação ({DIAS_PARA_VERIFICAR} dias)...")
 
-    for i in range(DIAS_PARA_VERIFICAR):
-        data_verificacao = hoje + timedelta(days=i)
-        data_str = data_verificacao.strftime("%Y-%m-%d")
-        data_br = data_verificacao.strftime("%d/%m/%Y")
+    # NOVAS REGRAS DA API (20/01/2026): Range de datas via GET
+    data_inicial = hoje.strftime("%Y-%m-%d")
+    data_final_obj = hoje + timedelta(days=DIAS_PARA_VERIFICAR)
+    data_final = data_final_obj.strftime("%Y-%m-%d")
 
-        turnos = ["MANHA", "TARDE"]
+    params = {
+        "dataInicial": data_inicial,
+        "dataFinal": data_final
+    }
 
-        for turno in turnos:
-            payload = {
-                "data": data_str,
-                "turno": turno
-            }
+    try:
+        # Agora é GET com parâmetros de URL
+        response = session.get(url, params=params, timeout=30)
+        
+        data_br_range = f"{hoje.strftime('%d/%m')} a {data_final_obj.strftime('%d/%m')}"
 
-            try:
-                time.sleep(DELAY_ENTRE_REQUISICOES) 
+        if response.status_code == 200:
+            dados = response.json()
+            
+            # Se a lista não estiver vazia, TEM VAGA!
+            if dados and isinstance(dados, list) and len(dados) > 0:
+                # Como não sabemos o formato exato do objeto novo, convertemos pra string bonita
+                dados_str = json.dumps(dados, indent=2, ensure_ascii=False)
                 
-                # Usamos 'session.post' em vez de 'requests.post' (mantém a conexão viva)
-                response = session.post(url, json=payload, timeout=30)
-
-                if response.status_code == 200:
-                    dados = response.json()
-                    
-                    if dados and isinstance(dados, list) and len(dados) > 0:
-                        msg = f"✅ **VAGA ENCONTRADA!**\n📅 Data: *{data_br}*\n⏰ Turno: *{turno}*\n🔗 [Acesse Agora](https://juntamedica.rn.gov.br/)"
-                        logging.info(msg)
-                        vagas_encontradas.append(msg)
-                        enviar_telegram(msg)
-                        
-                        try:
-                            winsound.Beep(1000, 1000)
-                            winsound.Beep(1500, 1000)
-                            winsound.Beep(1000, 1000)
-                        except:
-                            pass
-                    else:
-                        if DEBUG_MODE:
-                            logging.info(f"🔎 {data_br} ({turno}) -> Status: {response.status_code} | Vz")
+                msg = f"✅ **VAGA ENCONTRADA!**\n\nO site retornou vagas no período de {data_br_range}!\n\nDados brutos:\n`{dados_str}`\n\n🔗 [Acesse Agora](https://juntamedica.rn.gov.br/)"
+                logging.info("\n" + msg)
+                enviar_telegram(msg)
                 
-                elif response.status_code == 405:
-                    logging.error("Erro 405: API Incorreta.")
-                    return 
-                
-                elif response.status_code >= 500:
-                    logging.warning(f"⚠️ Instabilidade ({response.status_code}) em {data_br}")
-                
-                else:
-                    logging.warning(f"⚠️ Erro inesperado ({response.status_code}) para {data_br}.")
+                try:
+                    winsound.Beep(1000, 1000)
+                    winsound.Beep(1500, 1000)
+                    winsound.Beep(1000, 1000)
+                except:
+                    pass
+            else:
+                if DEBUG_MODE:
+                    # Log mais limpo: Apenas 1 linha por ciclo
+                    logging.info(f"🔎 {data_br_range} -> Status: 200 | Vz (Sem vagas)")
+        
+        elif response.status_code == 405:
+            logging.error("Erro 405: API mudou novamente ou método incorreto.")
+        
+        elif response.status_code >= 500:
+            logging.warning(f"⚠️ Instabilidade ({response.status_code}) - O site está congestionado.")
+        
+        else:
+            logging.warning(f"⚠️ Erro inesperado ({response.status_code}).")
 
-            except requests.exceptions.SSLError:
-                logging.warning(f"⚠️ Erro SSL (Conexão Recusada) em {data_br}")
-            except requests.exceptions.ConnectionError:
-                logging.warning(f"⚠️ Timeout/Queda em {data_br}")
-            except Exception as e:
-                logging.error(f"❌ Erro: {e}")
-
-    if not vagas_encontradas:
-        pass # Silencioso para não poluir, já tem o log de início
+    except requests.exceptions.SSLError:
+        logging.warning("⚠️ Erro SSL (Conexão caiu) - Tentando novamente...")
+    except requests.exceptions.ConnectionError:
+        logging.warning("⚠️ Erro de Conexão/Timeout - O servidor não respondeu.")
+    except Exception as e:
+        logging.error(f"❌ Erro genérico: {e}")
 
 def main():
     logging.info("🤖 Monitor Junta Médica - V2.0 (Persistent + Heartbeat)")
