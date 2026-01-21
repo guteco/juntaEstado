@@ -1,9 +1,12 @@
 import requests
 import logging
 
-# Credenciais (opiadas do monitor_junta.py)
-TELEGRAM_BOT_TOKEN = "SEU_TOKEN_AQUI"
-TELEGRAM_CHAT_ID = "SEU_CHAT_ID_AQUI"
+# Importa as configurações do arquivo principal
+try:
+    from monitor_junta import TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID
+except ImportError:
+    print("❌ Erro: Não encontrei o arquivo 'monitor_junta.py' na mesma pasta.")
+    exit()
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
 

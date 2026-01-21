@@ -4,9 +4,9 @@ Este projeto é um script de automação (bot) desenvolvido em Python para monit
 
 Ele foi criado para ajudar professores e servidores que precisam agendar perícias médicas e enfrentam dificuldades devido à alta concorrência por vagas.
 
-## ✨ Funcionalidades (V2.0)
+## ✨ Funcionalidades (V3.0 - Humanized)
 
-- **🚀 Modo Turbo**: Verifica a disponibilidade a cada 5-10 segundos.
+- **🧠 Intervalos Humanizados**: O tempo de espera é aleatório (ex: entre 3 e 8 segundos) para simular um humano e evitar detecção.
 - **🔄 Conexão Persistente**: Usa `requests.Session` para manter a conexão aberta, reduzindo erros de SSL e aumentando a velocidade.
 - **📱 Notificações via Telegram**: Envia um alerta instantâneo no seu celular assim que uma vaga é encontrada.
 - **🔊 Alerta Sonoro**: Emite 3 bipes altos no computador para chamar sua atenção.
@@ -22,12 +22,15 @@ Ele foi criado para ajudar professores e servidores que precisam agendar períci
 
 ## 📥 Instalação
 
-1. **Baixe ou Clone este repositório**:
-   ```bash
-   git clone https://github.com/SEU_USUARIO/monitor-junta-medica.git
-   cd monitor-junta-medica
-   ```
-   *(Ou apenas baixe o ZIP e extraia na sua máquina)*
+1. **Baixar o Projeto**:
+   - **Opção A (Fácil)**: Clique no botão verde `<> Code` no topo da página e selecione **"Download ZIP"**. Extraia a pasta no seu computador.
+   - **Opção B (Git)**: Clone o repositório:
+     ```bash
+     git clone https://github.com/SEU_USUARIO/monitor-junta-medica.git
+     cd monitor-junta-medica
+     ```
+
+   > **💡 Dica:** Assim que abrir a pasta do projeto, dê um duplo-clique no arquivo `manual_instrucoes.html`. Ele contém um **guia visual passo-a-passo** detalhado para iniciantes!
 
 2. **Instale as dependências**:
    ```bash
@@ -42,7 +45,10 @@ Ele foi criado para ajudar professores e servidores que precisam agendar períci
    TELEGRAM_BOT_TOKEN = "SEU_TOKEN_AQUI"
    TELEGRAM_CHAT_ID = "SEU_CHAT_ID_AQUI"
    ```
-3. Substitua pelos seus dados (se não souber como conseguir, veja o arquivo `manual_instrucoes.html` incluído neste projeto).
+3. **(Opcional) Ajuste a "Humanização"**:
+   - `INTERVALO_MIN`: Tempo mínimo de espera (padrão: 3.0s).
+   - `INTERVALO_MAX`: Tempo máximo de espera (padrão: 8.0s).
+4. Substitua pelos seus dados (se não souber como conseguir, veja o arquivo `manual_instrucoes.html` incluído neste projeto).
 
 ## 🚀 Como Rodar
 

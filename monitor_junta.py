@@ -4,15 +4,19 @@ from datetime import datetime, timedelta
 import json
 import logging
 import winsound # Para emitir som alerta
+import random # Para intervalo aleatório
 
 # ==============================================================================
 # CONFIGURAÇÕES -- (PRESERVADAS)
 # ==============================================================================
-TELEGRAM_BOT_TOKEN = "SEU_TOKEN_AQUI"
+TELEGRAM_BOT_TOKEN = "TELEGRAM_BOT_TOKEN"
 TELEGRAM_CHAT_ID = "TELEGRAM_CHAT_ID"
 
 # Intervalo entre verificações completas (em segundos)
-INTERVALO_VERIFICACAO = 5  # 10 segundos (Modo Turbo)
+# Intervalo ALEATÓRIO entre verificações (para parecer humano)
+# Tempo mínimo e máximo em segundos (pode usar ponto, ex: 2.5)
+INTERVALO_MIN = 3.0
+INTERVALO_MAX = 8.0
 
 # Pausa entre cada requisição para não travar a conexão (em segundos)
 DELAY_ENTRE_REQUISICOES = 0.3
@@ -30,7 +34,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s', date
 
 def enviar_telegram(mensagem):
     """Envia notificação para o Telegram."""
-    if TELEGRAM_BOT_TOKEN == "SEU_TOKEN_AQUI":
+    if TELEGRAM_BOT_TOKEN == "TELEGRAM_BOT_TOKEN":
         return
 
     url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
@@ -110,7 +114,7 @@ def verificar_vagas(session):
         logging.error(f"❌ Erro genérico: {e}")
 
 def main():
-    logging.info("🤖 Monitor Junta Médica - V2.0 (Persistent + Heartbeat)")
+    logging.info("🤖 Monitor Junta Médica - V3.0 (Humanized + Range API)")
     
     # ---------------------------------------------------------
     # MELHORIA 1: SESSÃO PERSISTENTE
@@ -149,8 +153,9 @@ def main():
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
             })
         
-        logging.info(f"⏳ Aguardando {INTERVALO_VERIFICACAO}s...")
-        time.sleep(INTERVALO_VERIFICACAO)
+        tempo_espera = random.uniform(INTERVALO_MIN, INTERVALO_MAX)
+        logging.info(f"⏳ Aguardando {tempo_espera:.2f}s...")
+        time.sleep(tempo_espera)
 
 if __name__ == "__main__":
     main()
