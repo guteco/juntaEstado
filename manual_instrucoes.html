@@ -99,7 +99,7 @@
 
 <body>
 
-    <h1>🤖 Robô da Junta Médica (Guia para Iniciantes)</h1>
+    <h1>🤖 Robô da Junta Médica V4.0 (Guia para Iniciantes)</h1>
     <p style="text-align: center; font-size: 1.2em;">Siga este guia passo-a-passo para instalar e ligar o robô que vai
         vigiar as vagas para você.</p>
 
@@ -144,6 +144,40 @@
             <p><code>pip install requests</code></p>
             <li>Se aparecer um monte de texto branco e terminar com "Sucessfully installed", deu certo! 🎉</li>
         </ol>
+        </ol>
+    </div>
+
+    <h2>PASSO 2.5: Criando o Robô no Telegram 📱</h2>
+    <div class="box">
+        <span class="passo">Onde pegar as senhas?</span>
+        <p>Você precisa de dois códigos secretos para o robô falar com você. Vamos pegar eles.</p>
+
+        <h3>Parte A: O Token do Robô</h3>
+        <ol>
+            <li>Abra o Telegram e pesquise por <strong>@BotFather</strong> (é o pai dos robôs, tem um selo azul).</li>
+            <li>Clique em <strong>Começar</strong> (ou Start).</li>
+            <li>Envie a mensagem: <code>/newbot</code></li>
+            <li>Ele vai pedir um nome. Digite qualquer um, ex: <code>Vigia da Junta do João</code>.</li>
+            <li>Ele vai pedir um "username". Tem que terminar com "bot". Ex: <code>vigia_joao_bot</code>.</li>
+            <li>Se der certo, ele vai te mandar uma mensagem enorme. Procure a parte vermelha que diz <strong>HTTP
+                    API:</strong>. Aquele código estranho é o seu <strong>TOKEN</strong>. Copie e guarde (ex:
+                <code>123456:ABC-def...</code>).
+            </li>
+        </ol>
+
+        <h3>Parte B: O Seu ID (Para onde mandar a mensagem)</h3>
+        <ol>
+            <li>No Telegram, pesquise por <strong>@userinfobot</strong>.</li>
+            <li>Clique em <strong>Começar</strong> (ou Start).</li>
+            <li>Ele vai responder na hora. O número que aparece em <strong>Id:</strong> é o seu
+                <strong>CHAT_ID</strong>. Copie e guarde (ex: <code>987654321</code>).
+            </li>
+        </ol>
+
+        <div class="dica">
+            💡 <strong>Dica Final:</strong> Antes de continuar, mande um "Oi" para o seu robô novo (aquele que você
+            criou no passo A). Se você não falar com ele primeiro, ele não pode te responder!
+        </div>
     </div>
 
     <h2>PASSO 3: Configurando o Robô 🤖</h2>
@@ -157,7 +191,8 @@
             <li><strong>Encontre o local certo:</strong> Role um pouco para baixo até ver o título gigante:</li>
             <p><code># CONFIGURAÇÕES -- (PRESERVADAS)</code></p>
             <li><strong>Coloque suas Senhas:</strong> Logo abaixo desse título, você verá
-                <code>TELEGRAM_BOT_TOKEN</code> e <code>TELEGRAM_CHAT_ID</code>. Mude APENAS ali.</li>
+                <code>TELEGRAM_BOT_TOKEN</code> e <code>TELEGRAM_CHAT_ID</code>. Mude APENAS ali.
+            </li>
             <li><strong>(Opcional) Ajuste a Velocidade:</strong> Também nessa mesma parte, você pode ajustar o "Modo
                 Humano":
                 <ul>

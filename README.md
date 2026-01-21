@@ -1,4 +1,4 @@
-# 🤖 Monitor de Vagas - Junta Médica RN
+# 🤖 Monitor Junta Médica V4.0 (Humanized + Range API)
 
 Este projeto é um script de automação (bot) desenvolvido em Python para monitorar a disponibilidade de vagas de agendamento no site da Junta Médica do Rio Grande do Norte.
 
