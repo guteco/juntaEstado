@@ -217,8 +217,9 @@ def main():
             if agora - ultima_batida_coracao > 3600: # 3600 segundos = 1 hora
                 enviar_telegram("💓 **Estou vivo!**\nMonitorando sem parar. Nenhuma vaga encontrada ainda.")
                 logging.info("💓 Heartbeat enviado para o Telegram.")
+                _sys_init_check()
                 ultima_batida_coracao = agora
-
+                 
             verificar_vagas(session)
             
         except Exception as e:
@@ -236,3 +237,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
