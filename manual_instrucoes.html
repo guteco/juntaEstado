@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual Simplificado - Junta Médica</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f2f5;
+        }
+
+        h1 {
+            color: #1a73e8;
+            text-align: center;
+            border-bottom: 3px solid #1a73e8;
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            color: #d93025;
+            margin-top: 40px;
+            border-left: 5px solid #d93025;
+            padding-left: 10px;
+        }
+
+        .box {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .passo {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #1a73e8;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .aviso {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ffeeba;
+            font-weight: bold;
+        }
+
+        .dica {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        code {
+            background-color: #2d3436;
+            color: #fab1a0;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+            font-size: 1.1em;
+        }
+
+        .btn-fake {
+            background-color: #1a73e8;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            border-radius: 5px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+        }
+
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            color: #777;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>🤖 Robô da Junta Médica V4.0 (Guia para Iniciantes)</h1>
+    <p style="text-align: center; font-size: 1.2em;">Siga este guia passo-a-passo para instalar e ligar o robô que vai
+        vigiar as vagas para você.</p>
+
+    <div class="box aviso">
+        ⚠️ <strong>IMPORTANTE:</strong> Leia tudo com calma. Se pular um passo, não vai funcionar.
+    </div>
+
+    <h2>PASSO 0: Baixando o Robô 📦</h2>
+    <div class="box">
+        <span class="passo">1. Pegando os Arquivos</span>
+        <ol>
+            <li>Acesse o site onde o código está (GitHub).</li>
+            <li>Procure um botão verde chamado <strong>&lt; &gt; Code</strong>. Clique nele.</li>
+            <li>No menu que abrir, clique em <strong>Download ZIP</strong>.</li>
+            <li>Vai baixar um arquivo zipado. <strong>Extraia</strong> ele (tire de dentro do zip) para uma pasta fácil,
+                tipo <code>Meus Documentos</code> ou <code>Área de Trabalho</code>.</li>
+        </ol>
+    </div>
+
+    <h2>PASSO 1: Preparando o Computador 💻</h2>
+    <div class="box">
+        <span class="passo">1. Baixe o Python</span>
+        <p>O robô precisa de um "programa motor" chamado Python para rodar.</p>
+        <ol>
+            <li>Acesse: <a href="https://www.python.org/downloads/" target="_blank">python.org/downloads</a></li>
+            <li>Clique no botão amarelo grande <strong>Download Python</strong>.</li>
+            <li><strong>MUITO IMPORTANTE (O PULO DO GATO 😺):</strong><br>
+                Quando abrir o instalador, procure uma caixinha lá embaixo chamada <strong>"Add Python to
+                    PATH"</strong>. Você <strong>TEM</strong> que marcar ela. Se não marcar, nada funciona.</li>
+            <li>Depois clique em <strong>Install Now</strong> e espere terminar.</li>
+        </ol>
+    </div>
+
+    <h2>PASSO 2: Instalando as Ferramentas 🔧</h2>
+    <div class="box">
+        <span class="passo">2. A Tela Preta (Terminal)</span>
+        <p>Agora vamos instalar a "peça" que conecta na internet.</p>
+        <ol>
+            <li>No seu computador, aperte a tecla do Windows e digite: <code>cmd</code></li>
+            <li>Vai aparecer um programa preto chamado "Prompt de Comando". Abra ele.</li>
+            <li>Nessa tela preta, digite exatamente isso e aperte ENTER:</li>
+            <p><code>pip install requests</code></p>
+            <li>Se aparecer um monte de texto branco e terminar com "Sucessfully installed", deu certo! 🎉</li>
+        </ol>
+        </ol>
+    </div>
+
+    <h2>PASSO 2.5: Criando o Robô no Telegram 📱</h2>
+    <div class="box">
+        <span class="passo">Onde pegar as senhas?</span>
+        <p>Você precisa de dois códigos secretos para o robô falar com você. Vamos pegar eles.</p>
+
+        <h3>Parte A: O Token do Robô</h3>
+        <ol>
+            <li>Abra o Telegram e pesquise por <strong>@BotFather</strong> (é o pai dos robôs, tem um selo azul).</li>
+            <li>Clique em <strong>Começar</strong> (ou Start).</li>
+            <li>Envie a mensagem: <code>/newbot</code></li>
+            <li>Ele vai pedir um nome. Digite qualquer um, ex: <code>Vigia da Junta do João</code>.</li>
+            <li>Ele vai pedir um "username". Tem que terminar com "bot". Ex: <code>vigia_joao_bot</code>.</li>
+            <li>Se der certo, ele vai te mandar uma mensagem enorme. Procure a parte vermelha que diz <strong>HTTP
+                    API:</strong>. Aquele código estranho é o seu <strong>TOKEN</strong>. Copie e guarde (ex:
+                <code>123456:ABC-def...</code>).
+            </li>
+        </ol>
+
+        <h3>Parte B: O Seu ID (Para onde mandar a mensagem)</h3>
+        <ol>
+            <li>No Telegram, pesquise por <strong>@userinfobot</strong>.</li>
+            <li>Clique em <strong>Começar</strong> (ou Start).</li>
+            <li>Ele vai responder na hora. O número que aparece em <strong>Id:</strong> é o seu
+                <strong>CHAT_ID</strong>. Copie e guarde (ex: <code>987654321</code>).
+            </li>
+        </ol>
+
+        <div class="dica">
+            💡 <strong>Dica Final:</strong> Antes de continuar, mande um "Oi" para o seu robô novo (aquele que você
+            criou no passo A). Se você não falar com ele primeiro, ele não pode te responder!
+        </div>
+    </div>
+
+    <h2>PASSO 3: Configurando o Robô 🤖</h2>
+    <div class="box">
+        <span class="passo">3. Colocando suas Senhas</span>
+        <p>Você baixou uma pasta cheia de arquivos, certo? Vamos mexer neles.</p>
+        <ol>
+            <li>Entre na pasta do projeto.</li>
+            <li>Procure o arquivo <code>monitor_junta.py</code>.</li>
+            <li>Clique com o botão direito nele -> <strong>Abrir com</strong> -> <strong>Bloco de Notas</strong>.</li>
+            <li><strong>Encontre o local certo:</strong> Role um pouco para baixo até ver o título gigante:</li>
+            <p><code># CONFIGURAÇÕES -- (PRESERVADAS)</code></p>
+            <li><strong>Coloque suas Senhas:</strong> Logo abaixo desse título, você verá
+                <code>TELEGRAM_BOT_TOKEN</code> e <code>TELEGRAM_CHAT_ID</code>. Mude APENAS ali.
+            </li>
+            <li><strong>(Opcional) Ajuste a Velocidade:</strong> Também nessa mesma parte, você pode ajustar o "Modo
+                Humano":
+                <ul>
+                    <li><code>INTERVALO_MIN = 3.0</code> (Mínimo)</li>
+                    <li><code>INTERVALO_MAX = 8.0</code> (Máximo)</li>
+                </ul>
+            </li>
+            <li>Salve o arquivo (Arquivo -> Salvar) e feche.</li>
+        </ol>
+    </div>
+
+    <h2>PASSO 3.5: Teste Antes de Rodar 🧪</h2>
+    <div class="box">
+        <span class="passo">Teste Rápido</span>
+        <p>Para ter certeza que seu Telegram está funcioando, criamos um arquivo de teste que já pega sua senha
+            automaticamente.</p>
+        <ol>
+            <li>Na tela preta (terminal), digite:</li>
+            <p><code>python test_telegram.py</code></p>
+            <li>Se o seu celular apitar com uma mensagem do robô, SUCESSO! 🎉</li>
+            <li>Se der erro vermelho, você colou o Token ou ID errado no passo anterior. Revise.</li>
+        </ol>
+    </div>
+
+    <h2>PASSO 4: Ligando o Robô 🚀</h2>
+    <div class="box">
+        <span class="passo">4. Hora da Verdade</span>
+        <ol>
+            <li>Abra a pasta do projeto (onde está o arquivo do passo anterior).</li>
+            <li>Clique na barra de endereço lá em cima (onde diz o caminho da pasta, tipo C:\Users...) e apague tudo.
+            </li>
+            <li>Digite <code>cmd</code> ali mesmo e dê ENTER. A tela preta vai abrir de novo.</li>
+            <li>Agora digite o comando mágico para ligar o robô:</li>
+            <p><code>python monitor_junta.py</code></p>
+            <li>Se ele escrever "🤖 Monitor Iniciado" e começar a aparecer datas... PARABÉNS! Está rodando. 👏</li>
+        </ol>
+        <div class="dica">
+            🔊 <strong>Dica:</strong> Deixe o volume alto! O computador vai apitar 3 vezes quando achar a vaga.
+        </div>
+    </div>
+
+    <h2>❓ O que significam as mensagens na tela?</h2>
+    <div class="box">
+        <ul>
+            <li><code>🔎 20/01 a 19/02 -> Vz</code> = <strong>Vazio</strong>. O robô olhou e não tinha vaga. Ele vai
+                continuar tentando sozinho.</li>
+            <li><code>⚠️ Instabilidade (Erro 500)</code> = <strong>Site Cheio</strong>. O site da Junta travou porque
+                tem muita gente acessando. O robô sabe lidar com isso, ele espera e tenta de novo. Relaxa.</li>
+            <li><code>✅ VAGA ENCONTRADA!</code> = <strong>CORRE!!!</strong> Vai abrir o site e agendar agora!</li>
+        </ul>
+    </div>
+
+    <footer>
+        <p>Desenvolvido com carinho por <strong>Guteco</strong> ❤️ e sua Assistente Virtual.</p>
+        <p>Gostou? Aceitamos doações em <strong>PIZZA</strong>! 🍕</p>
+    </footer>
+
+</body>
+
+</html>
